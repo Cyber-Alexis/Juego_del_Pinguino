@@ -2,9 +2,14 @@ package Modelo;
 
 public class Dado {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	private List<Integer> valores;
 
-	}
+    public List<Integer> getValores() {
+        return valores;
+    }
+
+    public void setValores(List<Integer> valores) {
+        this.valores = valores;
+    }
 
 }
