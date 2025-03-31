@@ -1,10 +1,13 @@
 package Modelo;
 
-public class CPU {
+	public class CPU extends Jugador {
+	    private String estrategiaCPU;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	    public String getEstrategiaCPU() {
+	        return estrategiaCPU;
+	    }
 
+	    public void setEstrategiaCPU(String estrategiaCPU) {
+	        this.estrategiaCPU = estrategiaCPU;
+	    }
 	}
-
-}
