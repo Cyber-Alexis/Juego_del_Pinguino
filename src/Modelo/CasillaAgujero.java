@@ -2,9 +2,22 @@ package Modelo;
 
 public class CasillaAgujero {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    private int posicion;
 
+    public CasillaAgujero(int posicion) {
+        this.posicion = posicion;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    }
+
+    public void caer(Jugador jugador) {
+        // Este apartado servira para enviar al jugador al agujero anterior
+        jugador.setPosicion(jugador.getPosicion() - 1); 
 	}
-
 }
