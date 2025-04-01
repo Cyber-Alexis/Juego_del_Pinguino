@@ -2,10 +2,17 @@ package Controlador;
 
 class ControladorPartida {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		//buenaas
-	}
-
+	    private Partida partida;
+	    
+	    public ControladorPartida(Partida partida) {
+	        this.partida = partida;
+	    }
+	    
+	    public int obtenerNumeroJugadoresRegistrados() {
+	        return partida.getNumeroJugadores();
+	    }
+	    
+	    public int obtenerNumeroCasillasGeneradas() {
+	        return partida.getTablero().getNumeroCasillas();
+	    }
 }
