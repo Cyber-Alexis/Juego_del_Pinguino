@@ -1,10 +1,21 @@
 package Modelo;
 
+import java.util.List;
+
 public class CasillaTrineo {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    private int posicion;
 
-	}
+    public CasillaTrineo(int posicion) {
+        this.posicion = posicion;
+    }
 
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    
+    }
 }
