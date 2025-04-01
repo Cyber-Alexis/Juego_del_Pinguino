@@ -2,9 +2,15 @@ package Modelo;
 
 public class Evento {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	 private String nombreEvento;
 
+	    public String getNombreEvento() {
+	        return nombreEvento;
+	    }
+
+	    public void setNombreEvento(String nombreEvento) {
+	        this.nombreEvento = nombreEvento;	
+	
 	}
 
 }

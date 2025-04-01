@@ -2,9 +2,14 @@ package Modelo;
 
 public class Casilla {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	 private int posicion;
 
-	}
+	    public int getPosicion() {
+	        return posicion;
+	    }
+
+	    public void setPosicion(int posicion) {
+	        this.posicion = posicion;
+	    }
 
 }
