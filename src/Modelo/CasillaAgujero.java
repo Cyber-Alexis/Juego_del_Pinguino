@@ -1,7 +1,6 @@
-package Modelo;
+ package Modelo;
 
 public class CasillaAgujero {
-
     private int posicion;
 
     public CasillaAgujero(int posicion) {
@@ -16,8 +15,12 @@ public class CasillaAgujero {
         this.posicion = posicion;
     }
 
-    public void caer(Jugador jugador) {
-        // Este apartado servira para enviar al jugador al agujero anterior
-        jugador.setPosicion(jugador.getPosicion() - 1); 
-	}
+    public void afectarJugador(Jugador jugador) {
+        // Si cae en un agujero retrocede un puesto
+        int nuevaPosicion = jugador.getPosicion() - 1;
+        if (nuevaPosicion >= 0) {
+            jugador.setPosicion(nuevaPosicion);
+            System.out.println(jugador.getNombre() + " ha caído en un agujero y retrocede a la casilla " + nuevaPosicion);
+        }
+    }
 }
