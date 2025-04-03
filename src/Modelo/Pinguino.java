@@ -1,10 +1,10 @@
 package Modelo;
 
-public class CasillaPinguino {
+public class Pinguino {
     private String nombre;
     private String color;
 
-    public CasillaPinguino(String nombre, String color) {
+    public Pinguino(String nombre, String color) {
         this.nombre = nombre;
         this.color = color;
     }
