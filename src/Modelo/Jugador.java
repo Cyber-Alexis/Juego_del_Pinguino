@@ -38,4 +38,17 @@ public class Jugador {
 	    public void setInventario(Inventario inventario) {
 	        this.inventario = inventario;
 	    }
+	    
+	    private Casilla casilladelPingu;
+
+	    public Casilla getCasillaActual() {
+	        return casilladelPingu;
+	    }
+
+	    public void setCasillaActual(Casilla casillaActual) {
+	        this.casilladelPingu = casillaActual;
+	      
+	        this.posicion = casillaActual.getPosicion();
+	    }
+
 	}
