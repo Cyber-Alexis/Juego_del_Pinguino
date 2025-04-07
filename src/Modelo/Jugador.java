@@ -41,6 +41,10 @@ public class Jugador {
 	    }
 	    
 	   
+	    public Jugador(String nombre) {
+	        this.nombre = nombre;
+	        this.posicion = 0;
+	    }
 
 	    public Casilla getCasillaActual() {
 	        return casilladelPingu;
