@@ -5,10 +5,10 @@ import Modelo.Pinguino;
 import Modelo.Casilla;
 import java.util.List;
 
-public class ControladordeTabla {
+public class ControladordeTablero {
     private Tablero tablero;
 
-    public ControladordeTabla(Tablero tablero) {
+    public ControladordeTablero(Tablero tablero) {
         this.tablero = tablero;
     }
 
