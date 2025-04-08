@@ -6,7 +6,8 @@ public class Jugador {
 	    private String color;
 	    private int posicion;
 	    private Inventario inventario;
-
+	    private Casilla casilladelPingu;
+	    
 	    public String getNombre() {
 	        return nombre;
 	    }
@@ -39,7 +40,11 @@ public class Jugador {
 	        this.inventario = inventario;
 	    }
 	    
-	    private Casilla casilladelPingu;
+	   
+	    public Jugador(String nombre) {
+	        this.nombre = nombre;
+	        this.posicion = 0;
+	    }
 
 	    public Casilla getCasillaActual() {
 	        return casilladelPingu;
