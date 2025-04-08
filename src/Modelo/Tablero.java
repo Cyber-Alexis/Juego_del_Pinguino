@@ -6,7 +6,7 @@ public class Tablero {
 
 	    private int numCasillas;
 	    private List<Casilla> casillas;
-	    private List<Jugador> jugadores;
+	    private List<Pinguino> jugadores;
 	    
 	    // Constructor Tablero
 	    public Tablero(int numCasillas) {
@@ -33,15 +33,15 @@ public class Tablero {
 	        this.casillas = casillas;
 	    }
 
-	    public List<Jugador> getJugadores() {
+	    public List<Pinguino> getJugadores() {
 	        return jugadores;
 	    }
 
-	    public void setJugadores(List<Jugador> jugadores) {
+	    public void setJugadores(List<Pinguino> jugadores) {
 	        this.jugadores = jugadores;
 	    }
 	    
-	    
+	    //Funciones
 	    
 	    private void inicializarCasillas() {
 	        for (int i = 0; i < numCasillas; i++) {
@@ -49,14 +49,14 @@ public class Tablero {
 	        }
 	    }
 
-	    public void agregarJugador(Jugador jugador) {
+	    public void agregarJugador(Pinguino jugador) {
 	        jugadores.add(jugador);
 	        jugador.setPosicion(0);  // Todos empiezan en la primera casilla
 	    }
 
 	    public void mostrarTablero() {
 	        System.out.println("Jugadores en el tablero:");
-	        for (Jugador j : jugadores) {
+	        for (Pinguino j : jugadores) {
 	            int pos = j.getPosicion();
 	            if (pos == 0) {
 	                System.out.println("- " + j.getNombre() + " está al inicio.");
