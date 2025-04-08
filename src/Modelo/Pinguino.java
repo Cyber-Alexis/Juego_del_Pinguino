@@ -11,6 +11,7 @@ public class Pinguino {
         this.nombre = nombre;
         this.color = color;
         this.posicion = 0;
+        this.inventario = new Inventario();
     }
 
     public String getNombre() {
@@ -45,6 +46,14 @@ public class Pinguino {
         this.casilladelPingu = casillaActual;
       
         this.posicion = casillaActual.getPosicion();
+    }
+    
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
     
 }
