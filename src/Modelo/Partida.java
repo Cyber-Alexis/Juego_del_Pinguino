@@ -7,10 +7,10 @@ import java.util.Random;
 public class Partida {
 	
 	 private Tablero tablero;
-	 private List<Jugador> jugadores;
+	 private List<Pinguino> jugadores;
 	
 	 public Partida() {
-	     jugadores = new ArrayList<Jugador>();
+	     jugadores = new ArrayList<Pinguino>();
 	     tablero = new Tablero(20); //Tablero de 20 casillas
 	 }
 	 
@@ -23,18 +23,18 @@ public class Partida {
 	     this.tablero = tablero;
 	 }
 	
-	 public List<Jugador> getJugadores() {
+	 public List<Pinguino> getJugadores() {
 	     return jugadores;
 	 }
 	
-	 public void setJugadores(List<Jugador> jugadores) {
+	 public void setJugadores(List<Pinguino> jugadores) {
 	     this.jugadores = jugadores;
 	     
 	 }
 	 
 	 //Funciones
 	 public void agregarJugador(String nombre) {
-	        Jugador jugador = new Jugador(nombre);
+		 	Pinguino jugador = new Pinguino(nombre);
 	        jugadores.add(jugador);
 	        tablero.agregarJugador(jugador);
 	    }
@@ -42,7 +42,7 @@ public class Partida {
 	 public void jugarTurno() {
 	        Random aleatorio = new Random();
 
-	        for (Jugador j : jugadores) {
+	        for (Pinguino j : jugadores) {
 	            int avance = aleatorio.nextInt(6) + 1;
 	            int nuevaPos = j.getPosicion() + avance;
 
