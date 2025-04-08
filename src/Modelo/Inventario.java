@@ -20,6 +20,10 @@ public class Inventario {
     public void setPeces(int peces) {
         this.peces = peces;
     }
+    
+    public void obtenerPez() {
+        this.peces++;
+    }
 
     public int getBolasDeNieve() {
         return bolasDeNieve;
@@ -28,5 +32,24 @@ public class Inventario {
     public void setBolasDeNieve(int bolasDeNieve) {
         this.bolasDeNieve = bolasDeNieve;
     }
-
+    
+    public void obtenerbolasdeNieve(int cantidad) {
+        this.bolasDeNieve += cantidad;
+    }
+    
+    public Inventario() {
+        this.peces = 0;
+        this.bolasDeNieve = 0;
+    }
+    
+    public void gastarboladeNieve() {
+        if (bolasDeNieve > 0) {
+            bolasDeNieve--;
+            System.out.println("¡Bola de nieve usada!");
+        } else {
+            System.out.println("No tienes bolas de nieve para usar.");
+        }
+        
+    }
+    
 }
