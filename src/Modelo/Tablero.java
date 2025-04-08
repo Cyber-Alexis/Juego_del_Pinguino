@@ -7,7 +7,16 @@ public class Tablero {
 	    private int numCasillas;
 	    private List<Casilla> casillas;
 	    private List<Jugador> jugadores;
-
+	    
+	    // Constructor Tablero
+	    public Tablero(int numCasillas) {
+	        this.numCasillas = numCasillas;
+	        this.casillas = new ArrayList<>();
+	        this.jugadores = new ArrayList<>();
+	        inicializarCasillas();
+	    }
+	    
+	    //Getters y Setters
 	    public int getNumCasillas() {
 	        return numCasillas;
 	    }
@@ -32,12 +41,7 @@ public class Tablero {
 	        this.jugadores = jugadores;
 	    }
 	    
-	    public Tablero(int numCasillas) {
-	        this.numCasillas = numCasillas;
-	        this.casillas = new ArrayList<>();
-	        this.jugadores = new ArrayList<>();
-	        inicializarCasillas();
-	    }
+	    
 	    
 	    private void inicializarCasillas() {
 	        for (int i = 0; i < numCasillas; i++) {
