@@ -12,7 +12,7 @@ public class ControladorPartida {
     }
 
     public void agregarJugador(String nombre, String color) {
-        partida.getJugadores().add(new Jugador(nombre, color));
+        partida.getJugadores().add(new Pinguino(nombre, color));
         System.out.println("Jugador " + nombre + " añadido con color " + color);
     }
 
@@ -20,14 +20,14 @@ public class ControladorPartida {
         System.out.println("¡La partida ha comenzado!");
     }
 
-    public void turnoJugador(Jugador jugador, int dado) {
+    public void turnoJugador(Pinguino jugador, int dado) {
         System.out.println("Turno de " + jugador.getNombre());
         int nuevaPosicion = jugador.getPosicion() + dado;
         System.out.println(jugador.getNombre() + " lanza el dado y avanza " + dado + " casillas.");
         partida.getTablero().moverJugador(jugador, nuevaPosicion);
     }
 
-    public List<Jugador> obtenerJugadores() {
+    public List<Pinguino> obtenerJugadores() {
         return partida.getJugadores();
     }
 }
