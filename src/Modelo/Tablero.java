@@ -45,8 +45,22 @@ public class Tablero {
 	    
 	    private void inicializarCasillas() {
 	        for (int i = 0; i < numCasillas; i++) {
-	            casillas.add(new Casilla(i));  // Supone que Casilla tiene un constructor con índice
+	        	 Casilla casilla = new Casilla(i);  // Supone que Casilla tiene un constructor con índice
+	            
+	         // Asignar tipos de casillas especiales según el índice
+	            if (i % 10 == 3) {
+	                casilla.setTipocasilla("agujero");
+	            } else if (i % 15 == 5) {
+	                casilla.setTipocasilla("oso");
+	            } else if (i % 12 == 7) {
+	                casilla.setTipocasilla("interrogante");
+	            } else if (i % 20 == 9) {
+	                casilla.setTipocasilla("trineo");
+	            }
+
+	            casillas.add(casilla);
 	        }
+	        
 	    }
 
 	    public void agregarJugador(Pinguino jugador) {
