@@ -7,6 +7,25 @@ import java.util.List;
 public class Casilla {
 
 	 private int posicion;
+	 private int indice;
+	 private String tipo;
+
+		    public Casilla(int indice) {
+		        this.indice = indice;
+		        this.tipo = "normal"; 
+		    }
+
+		    public int getIndice() {
+		        return indice;
+		    }
+
+		    public String getTipocasilla() {
+		        return tipo;
+		    }
+
+		    public void setTipocasilla(String tipo) {
+		        this.tipo = tipo;
+		    }
 
 	    public int getPosicion() {
 	        return posicion;
@@ -16,9 +35,9 @@ public class Casilla {
 	        this.posicion = posicion;
 	    }
 
-	    private List<Jugador> jugadores = new ArrayList<>();
+	    private List<Pinguino> jugadores = new ArrayList<>();
 
-	    public List<Jugador> getJugadores() {
+	    public List<Pinguino> getJugadores() {
 	        return jugadores;
 	    }
 
