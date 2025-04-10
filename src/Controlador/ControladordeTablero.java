@@ -14,7 +14,7 @@ public class ControladordeTablero {
 
     public void inicializarTablero() {
         System.out.println("Inicializando el tablero con 50 casillas...");
-        tablero.generarCasillas();
+        tablero.inicializarCasillas();
     }
 
     public void moverJugador(Pinguino jugador, int nuevaPosicion) {

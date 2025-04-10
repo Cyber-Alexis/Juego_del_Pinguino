@@ -43,7 +43,7 @@ public class Tablero {
 	    
 	    //Funciones
 	    
-	    private void inicializarCasillas() {
+	    public void inicializarCasillas() {
 	        for (int i = 0; i < numCasillas; i++) {
 	        	 Casilla casilla = new Casilla(i);  // Supone que Casilla tiene un constructor con índice
 	            

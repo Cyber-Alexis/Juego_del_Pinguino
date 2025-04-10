@@ -41,6 +41,11 @@ public class Casilla {
 	        return jugadores;
 	    }
 
+		public void activar(Pinguino jugador) {
+			// TODO Auto-generated method stub
+			
+		}
+
 			
 		}
 
