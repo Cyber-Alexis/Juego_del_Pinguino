@@ -15,7 +15,7 @@ public class CasillaAgujero {
         this.posicion = posicion;
     }
 
-    public void afectarJugador(Jugador jugador) {
+    public void afectarJugador(Pinguino jugador) {
         // Si cae en un agujero retrocede un puesto
         int nuevaPosicion = jugador.getPosicion() - 1;
         if (nuevaPosicion >= 0) {
