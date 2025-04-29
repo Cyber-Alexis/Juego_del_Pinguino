@@ -34,7 +34,7 @@ public class Partida {
 	 
 	 //Funciones
 	 public void agregarJugador(String nombre) {
-		 	Pinguino jugador = new Pinguino(nombre);
+		 	Pinguino jugador = new Pinguino(nombre, nombre);
 	        jugadores.add(jugador);
 	        tablero.agregarJugador(jugador);
 	    }
