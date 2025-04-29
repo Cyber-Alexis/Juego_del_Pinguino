@@ -10,13 +10,13 @@ public class Evento {
 
         if (evento < 25) {
             // 25% de probabilidad  Obtener un pez
-            jugador.getInventario().agregarPez(1);
+            jugador.getInventario().obtenerPez(1);
             System.out.println(jugador.getNombre() + " ha encontrado un pez!");
             
         } else if (evento < 50) {
             // 25%  Obtener entre 1 y 3 bolas de nieve
             int bolas = 1 + random.nextInt(3);
-            jugador.getInventario().agregarBolasDeNieve(bolas);
+            jugador.getInventario().obtenerbolasdeNieve(bolas);
             System.out.println(jugador.getNombre() + " ha obtenido " + bolas + " bolas de nieve.");
             
         } else if (evento < 60) {
