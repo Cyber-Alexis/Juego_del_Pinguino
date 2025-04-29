@@ -11,5 +11,3 @@ package Modelo;
 	        this.interactuarConJugador = interactuarConJugador;
 	    }
 	}
-
-
