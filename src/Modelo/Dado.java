@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 public class Dado {
-
+	
+	public Inventario inventario; // Accedemos al inventario
+	
     private List<Integer> valores; // Lista de valores posibles que puede sacar el dado
     private Random aleatorio; // Generador de números aleatorios
-
+    
     // Constructor que recibe una lista de valores para el dado
     public Dado(List<Integer> valores) {
         this.valores = valores;

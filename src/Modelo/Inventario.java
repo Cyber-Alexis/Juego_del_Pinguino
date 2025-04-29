@@ -2,8 +2,8 @@ package Modelo;
 
 public class Inventario {
     private int dados; // Cantidad de dados que tiene
-    private int DadoRapido;
-    private int DadoLento;
+	    private int DadoRapido;
+	    private int DadoLento;
     private int peces; // Cantidad de peces que tiene
     private int bolasDeNieve; // Cantidad de bolas de nieve que tiene
 
