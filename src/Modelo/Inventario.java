@@ -2,6 +2,8 @@ package Modelo;
 
 public class Inventario {
     private int dados; // Cantidad de dados que tiene
+    private int DadoRapido;
+    private int DadoLento;
     private int peces; // Cantidad de peces que tiene
     private int bolasDeNieve; // Cantidad de bolas de nieve que tiene
 
@@ -14,7 +16,30 @@ public class Inventario {
     public void setDados(int dados) {
         this.dados = dados;
     }
+    
+    public int getDadoRapido() {
+        return DadoRapido;
+    }
+    
+    public void setDadoRapido(int DadoRapi) {
+    	this.DadoRapido = DadoRapi;
+    }
 
+    public void obtenerDadoRapido(int cantidad) {
+        this.DadoRapido += cantidad;
+    }
+    public int getDadoLento() {
+        return DadoLento;
+    }
+    
+    public void setDadoLento(int DadoLent) {
+    	this.DadoLento = DadoLent;
+    }
+    
+    public void obtenerDadoLento(int cantidad) {
+        this.DadoLento += cantidad;
+    }
+    
     // Devuelve la cantidad de peces
     public int getPeces() {
         return peces;
@@ -49,10 +74,30 @@ public class Inventario {
     public Inventario() {
         this.peces = 0;
         this.bolasDeNieve = 0;
+        this.DadoRapido = 0;
+        this.DadoLento = 0;
     }
     
+    public void gastarDadoRapido(int i) {
+        if (DadoRapido > 0) {
+            DadoRapido--;
+            System.out.println("¡Dado rapido usado!");
+        } else {
+            System.out.println("No hay dados rapidos disponibles");
+        }
+    }
+    
+    public void gastarDadoLento(int i) {
+        if (DadoLento > 0) {
+            DadoLento--;
+            System.out.println("¡Dado lento usado!");
+        } else {
+            System.out.println("No hay dados lentos disponibles");
+        }
+        
+    }
     // Gasta una bola de nieve si hay disponible
-    public void gastarboladeNieve() {
+    public void gastarboladeNieve(int i) {
         if (bolasDeNieve > 0) {
             bolasDeNieve--;
             System.out.println("¡Bola de nieve usada!");
@@ -60,4 +105,8 @@ public class Inventario {
             System.out.println("No tienes bolas de nieve para usar.");
         }
     }
-}
+
+	
+	
+		
+	}
