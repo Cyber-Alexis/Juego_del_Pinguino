@@ -1,22 +1,15 @@
 package Modelo;
 
-import java.util.Random;
-
-public class CasillaInterrogante {
-    private int posicion;
-
-    // Constructor que asigna la posición de la casilla interrogante
+public class CasillaInterrogante extends Casilla {
     public CasillaInterrogante(int posicion) {
-        this.posicion = posicion;
+        super(posicion);
+        setTipo("interrogante");
     }
 
-    // Devuelve la posición de la casilla
-    public int getPosicion() {
-        return posicion;
-    }
-
-    // Establece una nueva posición para la casilla
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
+    @Override
+    public void activar(Pinguino jugador) {
+        System.out.println(jugador.getNombre() + " ha caído en una casilla de interrogante...");
+        Evento evento = Evento.generarEventoAleatorio();
+        evento.aplicar(jugador);
     }
 }
