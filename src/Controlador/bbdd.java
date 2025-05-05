@@ -40,10 +40,12 @@ public class bbdd {
 		}
 		
 		System.out.println("¿Usuario?");
-		String USER = scan.nextLine();
+		//String USER = scan.nextLine();
+		String USER = "DW2425_PIN_GRUP06";
 		
 		System.out.println("¿Contraseña?");
-		String PWD = scan.nextLine();
+		//String PWD = scan.nextLine();
+		String PWD = "ABMM006";
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
