@@ -1,10 +1,11 @@
 package Modelo;
 
 public class Inventario {
+	private int idInventario;
     private int dados; // Cantidad de dados que tiene
     private int peces; // Cantidad de peces que tiene
     private int bolasDeNieve; // Cantidad de bolas de nieve que tiene
-
+    
     // Devuelve la cantidad de dados
     public int getDados() {
         return dados;
@@ -49,6 +50,16 @@ public class Inventario {
     public Inventario() {
         this.peces = 0;
         this.bolasDeNieve = 0;
+    }
+    
+    // Devuelve la cantidad de dados
+    public int getIdInventario() {
+    	return idInventario;
+    }
+    
+    // Establece la cantidad de dados
+    public void setIdInventario(int idInventario) {
+    	this.idInventario = idInventario;
     }
     
     // Gasta una bola de nieve si hay disponible
