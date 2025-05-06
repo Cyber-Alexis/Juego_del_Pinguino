@@ -1,12 +1,13 @@
 package Modelo;
 
 public class Inventario {
+	private int idInventario;
     private int dados; // Cantidad de dados que tiene
 	    private int DadoRapido;
 	    private int DadoLento;
     private int peces; // Cantidad de peces que tiene
     private int bolasDeNieve; // Cantidad de bolas de nieve que tiene
-
+    
     // Devuelve la cantidad de dados
     public int getDados() {
         return dados;
@@ -78,24 +79,16 @@ public class Inventario {
         this.DadoLento = 0;
     }
     
-    public void gastarDadoRapido(int i) {
-        if (DadoRapido > 0) {
-            DadoRapido--;
-            System.out.println("¡Dado rapido usado!");
-        } else {
-            System.out.println("No hay dados rapidos disponibles");
-        }
+    // Devuelve la cantidad de dados
+    public int getIdInventario() {
+    	return idInventario;
     }
     
-    public void gastarDadoLento(int i) {
-        if (DadoLento > 0) {
-            DadoLento--;
-            System.out.println("¡Dado lento usado!");
-        } else {
-            System.out.println("No hay dados lentos disponibles");
-        }
-        
+    // Establece la cantidad de dados
+    public void setIdInventario(int idInventario) {
+    	this.idInventario = idInventario;
     }
+    
     // Gasta una bola de nieve si hay disponible
     public void gastarboladeNieve(int i) {
         if (bolasDeNieve > 0) {
