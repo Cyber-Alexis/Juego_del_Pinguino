@@ -16,7 +16,7 @@ public class GestorBaseDeDatos {
   
     // Sentencias SQL para la tabla JUGADOR
     private static final String INSERTAR_JUGADOR = 
-        "INSERT INTO JUGADOR (nickname, contraseña) VALUES (?, ?)";
+        "INSERT INTO JUGADOR (id_usuario, nickname, partidas_jugadas, contraseña) VALUES (jugador_sequencia.NEXTVAL, 'JugadorX')";
     
     private static final String BUSCAR_JUGADOR_POR_CREDENCIALES = 
         "SELECT id_usuario FROM JUGADOR WHERE nickname = ? AND contraseña = ?";
@@ -37,8 +37,8 @@ public class GestorBaseDeDatos {
     
     // Sentencias SQL para la tabla INVENTARIO
     private static final String INSERTAR_INVENTARIO = 
-        "INSERT INTO INVENTARIO (dados, peces, bolas_nieve, numero_partida, id_usuario) " +
-        "VALUES (?, ?, ?, ?, ?)";
+    	"INSERT INTO INVENTARIO (id_partida_jugador, dados, peces, bolas_nieve, id_inventario) VALUES (:id_usuario, sequencia_inventario_jugador.NEXTVAL)";
+
     
     private static final String ACTUALIZAR_INVENTARIO = 
         "UPDATE INVENTARIO SET dados = ?, peces = ?, bolas_nieve = ? " +
