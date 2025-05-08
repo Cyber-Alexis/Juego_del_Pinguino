@@ -134,7 +134,6 @@ public class pantallaPrincipalController {
         }
     }
 
-
     @FXML
     private void handleRegister() {
         System.out.println("Register pressed");
