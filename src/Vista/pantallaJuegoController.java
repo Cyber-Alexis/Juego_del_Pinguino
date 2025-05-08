@@ -4,6 +4,8 @@ import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -56,13 +58,25 @@ public class pantallaJuegoController {
         for (int i = 0; i < casillas.length; i++) {
             casillas[i] = TipoCasilla.NORMAL;
         }
-
-        casillas[5] = TipoCasilla.AGUJERO;
-        casillas[12] = TipoCasilla.AGUJERO;
-        casillas[15] = TipoCasilla.OSO;
-        casillas[20] = TipoCasilla.AGUJERO;
-        casillas[35] = TipoCasilla.OSO;
+        
+        //Hacer lo mismo con las demas
+        colocarCasillas(TipoCasilla.INTERROGANTE,4);
+        colocarCasillas(TipoCasilla.OSO,2);
+        colocarCasillas(TipoCasilla.TRINEO,5);
+        colocarCasillas(TipoCasilla.AGUJERO,5);
+        casillas[0] = TipoCasilla.NORMAL;
         casillas[49] = TipoCasilla.META;
+    }
+    private Random r= new Random();
+    private void colocarCasillas (TipoCasilla tipo, int cantidad) {
+    	for (int i = 0; i < cantidad; i++) {
+    		int posicion;
+    		
+    		do {
+    			posicion = r.nextInt(casillas.length -1) + 1;
+    		}while(casillas[posicion] != TipoCasilla.NORMAL);
+    		casillas[posicion] = tipo;
+    	}
     }
     
     @FXML
@@ -165,5 +179,55 @@ public class pantallaJuegoController {
         OSO,
         TRINEO,
         META
+    }
+    private void mostrarImagenes(){
+        for(int i = 0; i < casillas.length; i++) {
+            if(casillas[i] == TipoCasilla.AGUJERO){
+                int row = i / COLUMNS;
+                int col = i % COLUMNS;
+                Image image = new Image(getClass().getResource("/Resources/agujero.png").toExternalForm());
+                ImageView imageAgujero = new ImageView(image);
+                imageAgujero.setFitWidth(40);
+                imageAgujero.setFitHeight(40);
+                imageAgujero.setPreserveRatio(true);
+                tablero.add(imageAgujero, col, row);
+            } else if(casillas[i] == TipoCasilla.INTERROGANTE){
+                int row = i / COLUMNS;
+                int col = i % COLUMNS;
+                Image image = new Image(getClass().getResource("/Resources/interrogante.png").toExternalForm());
+                ImageView imageInterrogante = new ImageView(image);
+                imageInterrogante.setFitWidth(40);
+                imageInterrogante.setFitHeight(40);
+                imageInterrogante.setPreserveRatio(true);
+                tablero.add(imageInterrogante, col, row);
+            } else if(casillas[i] == TipoCasilla.OSO){
+                int row = i / COLUMNS;
+                int col = i % COLUMNS;
+                Image image = new Image(getClass().getResource("/Resources/oso.png").toExternalForm());
+                ImageView imageOso = new ImageView(image);
+                imageOso.setFitWidth(40);
+                imageOso.setFitHeight(40);
+                imageOso.setPreserveRatio(true);
+                tablero.add(imageOso, col, row);
+            } else if(casillas[i] == TipoCasilla.TRINEO){
+                int row = i / COLUMNS;
+                int col = i % COLUMNS;
+                Image image = new Image(getClass().getResource("/Resources/trineo.png").toExternalForm());
+                ImageView imageTrineo = new ImageView(image);
+                imageTrineo.setFitWidth(40);
+                imageTrineo.setFitHeight(40);
+                imageTrineo.setPreserveRatio(true);
+                tablero.add(imageTrineo, col, row);
+            } else if(casillas[i] == TipoCasilla.META){
+                int row = i / COLUMNS;
+                int col = i % COLUMNS;
+                Image image = new Image(getClass().getResource("/Resources/meta.png").toExternalForm());
+                ImageView imageMeta = new ImageView(image);
+                imageMeta.setFitWidth(40);
+                imageMeta.setFitHeight(40);
+                imageMeta.setPreserveRatio(true);
+                tablero.add(imageMeta, col, row);
+    		}
+    	}
     }
 }
