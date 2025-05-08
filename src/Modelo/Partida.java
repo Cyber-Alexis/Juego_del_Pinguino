@@ -119,21 +119,104 @@ public class Partida {
 	 
 	 
 	 public void jugarTurno() {
-	        Random aleatorio = new Random();
-
-	        for (Pinguino j : jugadores) {
-	            int avance = aleatorio.nextInt(6) + 1;
-	            int nuevaPos = j.getPosicion() + avance;
-
-	            if (nuevaPos >= tablero.getNumCasillas()) {
-	                nuevaPos = tablero.getNumCasillas() - 1;
-	                System.out.println(j.getNombre() + " llegó al final con un avance de " + avance + " casillas.");
-	            } else {
-	                System.out.println(j.getNombre() + " avanzó " + avance + " casillas hasta la casilla " + nuevaPos + ".");
-	            }
-
-	            j.setPosicion(nuevaPos);
+		 if (partidaTerminada) return;
+	        
+	        Pinguino jugadorActual = jugadores.get(turnoActual);
+	        System.out.println("Turno de " + jugadorActual.getNombre());
+	        
+	        if (jugadorActual.isEsCPU()) {
+	            turnoCPU(jugadorActual);
+	        } else {
+	            int resultadoDado = lanzarDado();
+	            System.out.println(jugadorActual.getNombre() + " lanzó un " + resultadoDado);
+	            turnoJugadorHumano(jugadorActual, resultadoDado);
 	        }
+	        
+	        // Actualizar estado de la partida para persistencia
+	        actualizarEstadoPartida();
+	        
+	        // Pasar al siguiente turno
+	        turnoActual = (turnoActual + 1) % jugadores.size();
+	    }
+	    
+	    private void turnoJugadorHumano(Pinguino jugador, int resultadoDado) {
+	        int nuevaPosicion = jugador.getPosicion() + resultadoDado;
+	        
+	        // Mover jugador y aplicar efectos de casilla
+	        tablero.moverJugador(jugador, nuevaPosicion);
+	        
+	        // Verificar si llegó al final
+	        if (jugador.getPosicion() >= tablero.getNumCasillas() - 1) {
+	            finalizarPartida(jugador);
+	        }
+	    }
+	    
+	    private void turnoCPU(Pinguino cpu) {
+	        int resultadoDado = lanzarDado();
+	        int nuevaPosicion = cpu.getPosicion() + resultadoDado;
+	        
+	        System.out.println("CPU lanzó un " + resultadoDado);
+	        tablero.moverJugador(cpu, nuevaPosicion);
+	        
+	        // La CPU puede atacar a jugadores humanos
+	        for (Pinguino jugador : jugadores) {
+	            if (!jugador.isEsCPU() && jugador.getPosicion() == cpu.getPosicion()) {
+	                atacarJugador(cpu, jugador);
+	            }
+	        }
+	    }
+	    
+	    private void atacarJugador(Pinguino atacante, Pinguino objetivo) {
+	        System.out.println(atacante.getNombre() + " ataca a " + objetivo.getNombre());
+	        
+	        if (objetivo.getInventario().getPeces() > 0) {
+	            objetivo.getInventario().setPeces(objetivo.getInventario().getPeces() - 1);
+	            System.out.println(objetivo.getNombre() + " usa un pez para defenderse");
+	        } else {
+	            objetivo.setPosicion(0); // Vuelve al inicio
+	            System.out.println(objetivo.getNombre() + " es atacado y vuelve al inicio");
+	        }
+	    }
+	    
+	    private int lanzarDado() {
+	        Random aleatorio = new Random();
+	        return aleatorio.nextInt(6) + 1; // Dado de 1 a 6
+	    }
+	    
+	    private void finalizarPartida(Pinguino ganador) {
+	        partidaTerminada = true;
+	        estado = "completada";
+	        System.out.println(ganador.getNombre() + " ha ganado la partida!");
+	    }
+	    
+	    private void actualizarEstadoPartida() {
+	        // Actualiza los campos para persistencia
+	        Pinguino jugadorActual = jugadores.get(turnoActual);
+	        this.idCasillaActual = jugadorActual.getPosicion();
+	        this.tipoCasillaActual = tablero.getCasillas().get(idCasillaActual).getTipocasilla();
+	    }
+	    
+	    // Métodos para persistencia
+	    public void guardarPartida() {
+	        actualizarEstadoPartida();
+	        GestorBaseDeDatos.actualizarPartida(numeroPartida, estado, idCasillaActual, tipoCasillaActual);
+	        
+	        // Guardar inventarios de los jugadores
+	        for (Pinguino jugador : jugadores) {
+	            if (!jugador.isEsCPU()) {
+	                Inventario inv = jugador.getInventario();
+	                GestorBaseDeDatos.actualizarInventario(
+	                    jugador.getIdInventario(), 
+	                    inv.getDados(), 
+	                    inv.getPeces(), 
+	                    inv.getBolasDeNieve()
+	                );
+	            }
+	        }
+	    }
+	    
+	    public void cargarPartida(int numeroPartida) {
+	        // Implementar carga de partida desde BD
 	    }
  
 }
