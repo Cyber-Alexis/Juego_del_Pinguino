@@ -81,7 +81,7 @@ public class pantallaPrincipalController {
         }
 
         // Crear nueva partida con posición inicial (casilla 0)
-        int idPartida = GestorBaseDatos.crearPartida(idUsuarioActual, 0, "inicio");
+        int idPartida = GestorBaseDeDatos.crearPartida(idUsuarioActual, 0, "inicio");
         
         if (idPartida != -1) {
             cargarPantallaJuego(event, idUsuarioActual, idPartida);
@@ -113,7 +113,7 @@ public class pantallaPrincipalController {
             Parent root = loader.load();
 
             // Pasar datos al controlador del juego
-            PantallaJuegoController juegoController = loader.getController();
+            pantallaJuegoController juegoController = loader.getController();
             juegoController.inicializarDatos(idUsuario, idPartida);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
