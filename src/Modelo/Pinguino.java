@@ -6,6 +6,7 @@ public class Pinguino {
     private Inventario inventario;
 	private Casilla casilladelPingu;
 	private int posicion;
+	private boolean esCPU;
 	
     public Pinguino(String nombre, String color) {
         this.nombre = nombre;
@@ -54,6 +55,14 @@ public class Pinguino {
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+    }
+    
+    public boolean isEsCPU() {
+    	return esCPU;
+    }
+    
+    public void setEsCPU(boolean esCPU) {
+    	this.esCPU = esCPU;
     }
     
 }
