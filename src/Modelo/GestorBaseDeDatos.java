@@ -39,13 +39,19 @@ public class GestorBaseDeDatos {
     private static final String INSERTAR_INVENTARIO = 
     	"INSERT INTO INVENTARIO (id_partida_jugador, dados, peces, bolas_nieve, id_inventario) VALUES (:id_usuario, sequencia_inventario_jugador.NEXTVAL)";
 
-    
     private static final String ACTUALIZAR_INVENTARIO = 
         "UPDATE INVENTARIO SET dados = ?, peces = ?, bolas_nieve = ? " +
         "WHERE id_partida_jugador = ?";
     
     private static final String OBTENER_INVENTARIO_POR_PARTIDA = 
         "SELECT * FROM INVENTARIO WHERE numero_partida = ? AND id_usuario = ?";
+    
+    private static final String OBTENER_ULTIMA_PARTIDA = 
+    	"SELECT numero_partida FROM INVENTARIO " +
+    	"WHERE id_usuario = ? AND numero_partida = (SELECT MAX(numero_partida) FROM INVENTARIO WHERE id_usuario = ?)";
+    	    
+    private static final String OBTENER_ID_INVENTARIO = 
+    	"SELECT id_inventario FROM INVENTARIO WHERE numero_partida = ? AND id_usuario = ?";
     
     // Obtiene una conexión a la base de datos
     public static Connection obtenerConexion() throws SQLException {
@@ -55,43 +61,36 @@ public class GestorBaseDeDatos {
     // Registra un nuevo jugador en la base de datos
     public static boolean registrarJugador(String nickname, String contraseña) {
         try (Connection conexion = obtenerConexion();
-             PreparedStatement ps = conexion.prepareStatement(INSERTAR_JUGADOR)) {
+             PreparedStatement ps = conexion.prepareStatement(INSERTAR_JUGADOR, new String[]{"id_usuario"})) {
             
             ps.setString(1, nickname);
             ps.setString(2, contraseña);
-            return ps.executeUpdate() > 0;
+            ps.executeUpdate();
             
-        } catch (SQLException e) {
-            System.err.println("Error al registrar jugador: " + e.getMessage());
-            return false;
-        }
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                return rs.next() ? rs.getInt(1) : -1;
+            }
+        } 
     }
     
     // Autentica a un jugador con su nickname y contraseña
-    public static int autenticarJugador(String nickname, String contraseña) {
-        try (Connection conexion = obtenerConexion();
-             PreparedStatement ps = conexion.prepareStatement(BUSCAR_JUGADOR_POR_CREDENCIALES)) {
-            
-            ps.setString(1, nickname);
-            ps.setString(2, contraseña);
-            
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id_usuario");
+    public static int autenticarJugador(String nickname, String contraseña) throws SQLException {
+    	 try (Connection conexion = obtenerConexion();
+                 PreparedStatement ps = conexion.prepareStatement(BUSCAR_JUGADOR_POR_CREDENCIALES)) {
+                
+                ps.setString(1, nickname);
+                ps.setString(2, contraseña);
+                
+                try (ResultSet rs = ps.executeQuery()) {
+                    return rs.next() ? rs.getInt("id_usuario") : -1;
                 }
             }
-            return -1;
-            
-        } catch (SQLException e) {
-            System.err.println("Error al autenticar jugador: " + e.getMessage());
-            return -1;
-        }
     }
     
     // Crea una nueva partida en la base de datos
-    public static int crearPartida(int idJugador, int idCasilla, String tipoCasilla) {
+    public static int crearPartida(int idJugador, int idCasilla, String tipoCasilla) throws SQLException {
         try (Connection conexion = obtenerConexion();
-             PreparedStatement ps = conexion.prepareStatement(INSERTAR_PARTIDA, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement ps = conexion.prepareStatement(INSERTAR_PARTIDA, new String[]{"numero_partida"})) {
             
             ps.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
             ps.setString(2, "en_progreso");
@@ -251,5 +250,19 @@ public class GestorBaseDeDatos {
         }
         
         return partidas;
+    }
+    
+    // Obtiene el ID del inventario de una partida
+    public static int obtenerIdInventario(int numeroPartida, int idUsuario) throws SQLException {
+        try (Connection conexion = obtenerConexion();
+             PreparedStatement ps = conexion.prepareStatement(OBTENER_ID_INVENTARIO)) {
+            
+            ps.setInt(1, numeroPartida);
+            ps.setInt(2, idUsuario);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getInt("id_inventario") : -1;
+            }
+        }
     }
 }
