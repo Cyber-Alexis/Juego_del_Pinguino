@@ -16,7 +16,7 @@ public class ControladordeTablero {
     // Inicializa el tablero generando las casillas
     public void inicializarTablero() {
         System.out.println("Inicializando el tablero con 50 casillas...");
-        tablero.generarCasillas(); // Genera las casillas en el tablero
+        tablero.inicializarCasillas(); // Genera las casillas en el tablero
     }
 
     // Mueve al jugador a una nueva posición y activa la casilla correspondiente
