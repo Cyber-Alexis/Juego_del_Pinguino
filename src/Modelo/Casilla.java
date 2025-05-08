@@ -52,7 +52,12 @@ public class Casilla {
 			// TODO Auto-generated method stub
 			
 		}
-
+		
+	
 			
 		}
+		
+
+			
+		
 
