@@ -11,7 +11,12 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class pantallaJuegoController {
-
+	
+	private int numBolasNieve = 0;
+	private int numPeces = 0;
+	private final int MAX_BOLAS_NIEVE = 6;
+	private final int MAX_PECES = 6;
+	
     // Menu items
     @FXML private MenuItem newGame;
     @FXML private MenuItem saveGame;
@@ -66,6 +71,8 @@ public class pantallaJuegoController {
         colocarCasillas(TipoCasilla.AGUJERO,5);
         casillas[0] = TipoCasilla.NORMAL;
         casillas[49] = TipoCasilla.META;
+        
+        mostrarImagenes();
     }
     private Random r= new Random();
     private void colocarCasillas (TipoCasilla tipo, int cantidad) {
@@ -94,10 +101,52 @@ public class pantallaJuegoController {
         TipoCasilla tipo = casillas[p1Position];
 
         switch (tipo) {
-            case AGUJERO:
-                eventos.setText("¡Caíste en un agujero! Retrocedes 1 casilla.");
-                p1Position = Math.max(0, p1Position - 1);
-                break;
+        case AGUJERO:
+            int nuevaPos = 0;
+            for (int i = p1Position - 1; i >= 0; i--) {
+                if (casillas[i] == TipoCasilla.AGUJERO) {
+                    nuevaPos = i;
+                    break;
+                }
+            }
+            eventos.setText("¡Caíste en un agujero! Retrocedes hasta el agujero anterior.");
+            p1Position = nuevaPos;
+            break;
+            
+        case INTERROGANTE:
+            int recompensa = r.nextInt(4); // 0 a 3
+            switch (recompensa) {
+                case 0: // Bola de nieve
+                    if (numBolasNieve < MAX_BOLAS_NIEVE) {
+                        numBolasNieve++;
+                        eventos.setText("¡Encontraste una bola de nieve! ❄️ Total: " + numBolasNieve);
+                    } else {
+                        eventos.setText("¡Interrogante! Ibas a recibir una bola de nieve, pero ya tienes el máximo.");
+                    }
+                    break;
+
+                case 1: // Dado rápido
+                    eventos.setText("¡Interrogante! Te dieron un dado rápido. 🎲💨");
+                    // Aquí puedes aplicar efecto si lo deseas
+                    break;
+
+                case 2: // Dado lento
+                    eventos.setText("¡Interrogante! Te dieron un dado lento. 🐢");
+                    // Aquí también podrías aplicar algún efecto especial
+                    break;
+
+                case 3: // Pez
+                    if (numPeces < MAX_PECES) {
+                        numPeces++;
+                        tienePez = true;
+                        eventos.setText("¡Interrogante! Obtuviste un pez. 🐟 Total: " + numPeces);
+                    } else {
+                        eventos.setText("¡Interrogante! Ibas a recibir un pez, pero ya tienes el máximo.");
+                    }
+                    break;
+            }
+            break;
+
 
             case OSO:
                 if (tienePez) {
@@ -109,6 +158,22 @@ public class pantallaJuegoController {
                 }
                 break;
 
+            case TRINEO:
+                int nuevaPosTrineo = p1Position; // por defecto se queda donde está
+                for (int i = p1Position + 1; i < casillas.length; i++) {
+                    if (casillas[i] == TipoCasilla.TRINEO) {
+                        nuevaPosTrineo = i;
+                        break;
+                    }
+                }
+                if (nuevaPosTrineo != p1Position) {
+                    eventos.setText("¡Subiste a un trineo! Avanzas hasta el siguiente trineo.");
+                    p1Position = nuevaPosTrineo;
+                } else {
+                    eventos.setText("¡Subiste a un trineo, pero no hay más adelante!");
+                }
+                break;                  
+                
             case META:
                 eventos.setText("¡Felicidades! Has llegado a la meta 🏁");
                 break;
