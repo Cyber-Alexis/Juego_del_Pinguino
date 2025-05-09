@@ -1,141 +1,151 @@
 package Vista;
 
-import Modelo.GestorBaseDeDatos;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import Controlador.bbdd;
+import Controlador.saveCon;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventType;
+import javafx.scene.Node;
 
 public class pantallaPrincipalController {
 
-    // Componentes FXML
-    @FXML private TextField campoUsuario;
-    @FXML private PasswordField campoContraseña;
-    @FXML private Button botonLogin;
-    @FXML private Button botonRegistro;
-    @FXML private MenuItem menuNuevaPartida;
-    @FXML private MenuItem menuCargarPartida;
-    @FXML private MenuItem menuSalir;
+    @FXML private MenuItem newGame;
+    @FXML private MenuItem saveGame;
+    @FXML private MenuItem loadGame;
+    @FXML private MenuItem quitGame;
 
-    // Variables de instancia
-    private int idUsuarioActual = -1;
+    @FXML private TextField userField;
+    @FXML private PasswordField passField;
+
+    @FXML private Button loginButton;
+    @FXML private Button registerButton;
 
     @FXML
     private void initialize() {
-        // Configuración inicial si es necesaria
-        menuNuevaPartida.setDisable(true);
-        menuCargarPartida.setDisable(true);
+        // This method is called automatically after the FXML is loaded
+        // You can set initial values or add listeners here
+        System.out.println("pantallaPrincipalController initialized");
     }
 
+    @FXML
+    private void handleNewGame() {
+        System.out.println("New Game clicked");
+        // TODO
+    }
+
+    @FXML
+    private void handleSaveGame() {
+        System.out.println("Save Game clicked");
+        // TODO
+    }
+
+    @FXML
+    private void handleLoadGame() {
+        System.out.println("Load Game clicked");
+        // TODO
+    }
+
+    @FXML
+    private void handleQuitGame(EventType event) {
+        Platform.exit();
+    }
+   
     @FXML
     private void handleLogin(ActionEvent event) {
-        String usuario = campoUsuario.getText().trim();
-        String contraseña = campoContraseña.getText().trim();
+        String username = userField.getText();
+        String password = passField.getText();
 
-        if (usuario.isEmpty() || contraseña.isEmpty()) {
-            mostrarAlerta("Error", "Por favor ingrese usuario y contraseña", Alert.AlertType.ERROR);
-            return;
-        }
+        System.out.println("Login pressed: " + username + " / " + password);
 
-        idUsuarioActual = GestorBaseDeDatos.autenticarJugador(usuario, contraseña);
+        if (!username.isEmpty() && !password.isEmpty()) {
+            try (Connection conn = bbdd.conectarBaseDatos()) {
+                String sql = "SELECT * FROM JUGADOR WHERE NICKNAME = ? AND CONTRASEÑA = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, username);
+                stmt.setString(2, password);
 
-        if (idUsuarioActual != -1) {
-            mostrarAlerta("Éxito", "Inicio de sesión correcto", Alert.AlertType.INFORMATION);
-            habilitarOpcionesMenu(true);
-            cargarPantallaJuego(event, idUsuarioActual);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    // Usuario válido, carga la siguiente pantalla
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Resources/pantallaJuego.fxml"));
+                    Parent pantallaJuegoRoot = loader.load();
+
+                    Scene pantallaJuegoScene = new Scene(pantallaJuegoRoot);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(pantallaJuegoScene);
+                    stage.setTitle("Pantalla de Juego");
+                } else {
+                    System.out.println("Nombre de usuario o contraseña incorrectos.");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
-            mostrarAlerta("Error", "Credenciales incorrectas", Alert.AlertType.ERROR);
+            System.out.println("Por favor, introduce nombre de usuario y contraseña.");
         }
+    
     }
-
     @FXML
-    private void handleRegistro(ActionEvent event) {
-        String usuario = campoUsuario.getText().trim();
-        String contraseña = campoContraseña.getText().trim();
+    private void handleRegister() {
+        String username = userField.getText();
+        String password = passField.getText();
 
-        if (usuario.isEmpty() || contraseña.isEmpty()) {
-            mostrarAlerta("Error", "Por favor ingrese usuario y contraseña", Alert.AlertType.ERROR);
-            return;
-        }
+        System.out.println("Register pressed: " + username + " / " + password);
 
-        if (GestorBaseDeDatos.registrarJugador(usuario, contraseña)) {
-            mostrarAlerta("Éxito", "Usuario registrado correctamente", Alert.AlertType.INFORMATION);
-            idUsuarioActual = GestorBaseDeDatos.autenticarJugador(usuario, contraseña);
-            habilitarOpcionesMenu(true);
+        if (!username.isEmpty() && !password.isEmpty()) {
+            try {
+                // Crear conexión y guardarla en saveCon
+                Connection conn = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@localhost:1521/XEPDB2", // Cambia según tu base
+                    "DW2425_PIN_GRUP06",                          // Cambia por tu usuario
+                    "ABMM006"                        // Cambia por tu contraseña
+                );
+                saveCon.setConexion(conn);
+
+                // Verificar si ya existe el nickname
+                String checkSql = "SELECT COUNT(*) FROM JUGADOR WHERE NICKNAME = ?";
+                PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+                checkStmt.setString(1, username);
+                ResultSet rs = checkStmt.executeQuery();
+                rs.next();
+
+                if (rs.getInt(1) > 0) {
+                    System.out.println("El nombre de usuario ya existe.");
+                    return;
+                }
+
+                // Insertar nuevo jugador con secuencia
+                String insertSql = "INSERT INTO JUGADOR (ID_USUARIO, NICKNAME, PARTIDAS_JUGADAS, CONTRASEÑA) " +
+                                   "VALUES (JUGADOR_SECUENCIA.NEXTVAL, ?, 0, ?)";
+                PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+                insertStmt.setString(1, username);
+                insertStmt.setString(2, password);
+                insertStmt.executeUpdate();
+
+                System.out.println("Registro exitoso.");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
-            mostrarAlerta("Error", "El usuario ya existe o hubo un error", Alert.AlertType.ERROR);
+            System.out.println("Por favor, introduce nombre de usuario y contraseña.");
         }
-    }
-
-    @FXML
-    private void handleNuevaPartida(ActionEvent event) {
-        if (idUsuarioActual == -1) {
-            mostrarAlerta("Error", "Debe iniciar sesión primero", Alert.AlertType.ERROR);
-            return;
-        }
-
-        // Crear nueva partida con posición inicial (casilla 0)
-        int idPartida = GestorBaseDeDatos.crearPartida(idUsuarioActual, 0, "inicio");
-        
-        if (idPartida != -1) {
-            cargarPantallaJuego(event, idUsuarioActual, idPartida);
-        } else {
-            mostrarAlerta("Error", "No se pudo crear la partida", Alert.AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    private void handleCargarPartida(ActionEvent event) {
-        // Implementar lógica para mostrar partidas guardadas y cargar una seleccionada
-        // Esto requeriría una nueva pantalla FXML para seleccionar partidas
-        mostrarAlerta("En desarrollo", "Funcionalidad en desarrollo", Alert.AlertType.INFORMATION);
-    }
-
-    @FXML
-    private void handleSalir() {
-        System.exit(0);
-    }
-
-    // Métodos auxiliares
-    private void cargarPantallaJuego(ActionEvent event, int idUsuario) {
-        cargarPantallaJuego(event, idUsuario, -1); // -1 indica nueva partida
-    }
-
-    private void cargarPantallaJuego(ActionEvent event, int idUsuario, int idPartida) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/pantallaJuego.fxml"));
-            Parent root = loader.load();
-
-            // Pasar datos al controlador del juego
-            pantallaJuegoController juegoController = loader.getController();
-            juegoController.inicializarDatos(idUsuario, idPartida);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("El Joc d'en Pingu - " + campoUsuario.getText());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo cargar la pantalla de juego", Alert.AlertType.ERROR);
-        }
-    }
-
-    private void habilitarOpcionesMenu(boolean habilitar) {
-        menuNuevaPartida.setDisable(!habilitar);
-        menuCargarPartida.setDisable(!habilitar);
-    }
-
-    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
-        Alert alert = new Alert(tipo);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
     }
 }
