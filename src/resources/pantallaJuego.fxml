@@ -383,7 +383,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="35" GridPane.rowIndex="7">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="36" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -391,7 +391,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="36" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="35" GridPane.rowIndex="7">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -585,10 +585,6 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-                  <Circle fx:id="P1" fill="BLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin></Circle>
                   <Circle fx:id="P2" fill="RED" radius="15.0" stroke="BLACK" strokeType="INSIDE">
                      <GridPane.margin>
                         <Insets left="40.0" />
@@ -600,6 +596,10 @@
                   <Circle fx:id="P4" fill="YELLOW" radius="15.0" stroke="BLACK" strokeType="INSIDE">
                      <GridPane.margin>
                         <Insets left="120.0" />
+                     </GridPane.margin></Circle>
+                  <Circle fx:id="P1" fill="BLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+                     <GridPane.margin>
+                        <Insets />
                      </GridPane.margin></Circle>
                </children>
             </GridPane>

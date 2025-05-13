@@ -191,105 +191,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="45" GridPane.rowIndex="9">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Finish" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
-                  <Circle fx:id="P1" fill="BLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin></Circle>
-                  <Circle fx:id="P2" fill="RED" radius="15.0" stroke="BLACK" strokeType="INSIDE">
-                     <GridPane.margin>
-                        <Insets left="40.0" />
-                     </GridPane.margin></Circle>
-                  <Circle fx:id="P3" fill="GREEN" radius="15.0" stroke="BLACK" strokeType="INSIDE">
-                     <GridPane.margin>
-                        <Insets left="80.0" />
-                     </GridPane.margin></Circle>
-                  <Circle fx:id="P4" fill="YELLOW" radius="15.0" stroke="BLACK" strokeType="INSIDE">
-                     <GridPane.margin>
-                        <Insets left="120.0" />
-                     </GridPane.margin></Circle>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="2" GridPane.columnIndex="2">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="1" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
                   <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="8" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="3" GridPane.columnIndex="3">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="32" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="27" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="22" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="17" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="12" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -313,6 +215,30 @@
                         <Blend />
                      </effect>
                   </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="5" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="10" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="15" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
                   <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="11" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
@@ -329,7 +255,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="21" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="12" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -337,79 +263,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="26" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="31" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="19" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="4" GridPane.columnIndex="4">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="14" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="9" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="33" GridPane.columnIndex="3" GridPane.rowIndex="6">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="28" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="23" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="18" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="17" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -425,7 +279,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="35" GridPane.rowIndex="7">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="18" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -433,7 +287,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="30" GridPane.rowIndex="6">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="23" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -441,7 +295,15 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="25" GridPane.rowIndex="5">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="22" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="21" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -457,7 +319,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="15" GridPane.rowIndex="3">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="25" GridPane.rowIndex="5">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -465,7 +327,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="10" GridPane.rowIndex="2">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="26" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -473,7 +335,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="5" GridPane.rowIndex="1">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="27" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -481,7 +343,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="34" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="28" GridPane.columnIndex="3" GridPane.rowIndex="5">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -489,7 +351,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="29" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="33" GridPane.columnIndex="3" GridPane.rowIndex="6">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -497,7 +359,71 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="24" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="32" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="31" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="30" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="36" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="35" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="37" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="38" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="43" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="42" GridPane.columnIndex="2" GridPane.rowIndex="8">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -521,31 +447,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="39" GridPane.columnIndex="4" GridPane.rowIndex="7">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="38" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="37" GridPane.columnIndex="2" GridPane.rowIndex="7">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="36" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="45" GridPane.rowIndex="9">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -585,7 +487,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="43" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="39" GridPane.columnIndex="4" GridPane.rowIndex="7">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -593,7 +495,7 @@
                         <Blend />
                      </effect>
                   </TextField>
-                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="42" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="34" GridPane.columnIndex="4" GridPane.rowIndex="6">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -601,6 +503,104 @@
                         <Blend />
                      </effect>
                   </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="29" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="24" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="19" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="14" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="9" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="4" GridPane.columnIndex="4">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="3" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="2" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <TextField alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="239.0" text="1" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Finish" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Circle fx:id="P2" fill="RED" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+                     <GridPane.margin>
+                        <Insets left="40.0" />
+                     </GridPane.margin></Circle>
+                  <Circle fx:id="P3" fill="GREEN" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+                     <GridPane.margin>
+                        <Insets left="80.0" />
+                     </GridPane.margin></Circle>
+                  <Circle fx:id="P4" fill="YELLOW" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+                     <GridPane.margin>
+                        <Insets left="120.0" />
+                     </GridPane.margin></Circle>
+                  <Circle fx:id="P1" fill="BLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></Circle>
                </children>
             </GridPane>
          </top>
