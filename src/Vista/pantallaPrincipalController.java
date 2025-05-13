@@ -9,7 +9,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import Controlador.bbdd;
+import Controlador.saveCon;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.scene.Node;
 
 public class pantallaPrincipalController {
@@ -51,10 +61,8 @@ public class pantallaPrincipalController {
     }
 
     @FXML
-    private void handleQuitGame() {
-        System.out.println("Quit Game clicked");
-        // TODO
-        System.exit(0);
+    private void handleQuitGame(EventType event) {
+        Platform.exit();
     }
    
     @FXML
@@ -64,30 +72,80 @@ public class pantallaPrincipalController {
 
         System.out.println("Login pressed: " + username + " / " + password);
 
-        // Basic check (just for demo, replace with real login logic)
         if (!username.isEmpty() && !password.isEmpty()) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantallaJuego.fxml"));
-                Parent pantallaJuegoRoot = loader.load();
+            try (Connection conn = bbdd.conectarBaseDatos()) {
+                String sql = "SELECT * FROM JUGADOR WHERE NICKNAME = ? AND CONTRASEÑA = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, username);
+                stmt.setString(2, password);
 
-                Scene pantallaJuegoScene = new Scene(pantallaJuegoRoot);
+                ResultSet rs = stmt.executeQuery();
 
-                // Get the current stage using the event
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(pantallaJuegoScene);
-                stage.setTitle("Pantalla de Juego");
+                if (rs.next()) {
+                    // Usuario válido, carga la siguiente pantalla
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Resources/pantallaJuego.fxml"));
+                    Parent pantallaJuegoRoot = loader.load();
+
+                    Scene pantallaJuegoScene = new Scene(pantallaJuegoRoot);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(pantallaJuegoScene);
+                    stage.setTitle("Pantalla de Juego");
+                } else {
+                    System.out.println("Nombre de usuario o contraseña incorrectos.");
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Please. Enter user and password.");
+            System.out.println("Por favor, introduce nombre de usuario y contraseña.");
         }
+    
     }
-
-
     @FXML
     private void handleRegister() {
-        System.out.println("Register pressed");
-        // TODO
+        String username = userField.getText();
+        String password = passField.getText();
+
+        System.out.println("Register pressed: " + username + " / " + password);
+
+        if (!username.isEmpty() && !password.isEmpty()) {
+            try {
+                // Crear conexión y guardarla en saveCon
+                Connection conn = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@localhost:1521/XEPDB2", // Cambia según tu base
+                    "DW2425_PIN_GRUP06",                          // Cambia por tu usuario
+                    "ABMM006"                        // Cambia por tu contraseña
+                );
+                saveCon.setConexion(conn);
+
+                // Verificar si ya existe el nickname
+                String checkSql = "SELECT COUNT(*) FROM JUGADOR WHERE NICKNAME = ?";
+                PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+                checkStmt.setString(1, username);
+                ResultSet rs = checkStmt.executeQuery();
+                rs.next();
+
+                if (rs.getInt(1) > 0) {
+                    System.out.println("El nombre de usuario ya existe.");
+                    return;
+                }
+
+                // Insertar nuevo jugador con secuencia
+                String insertSql = "INSERT INTO JUGADOR (ID_USUARIO, NICKNAME, PARTIDAS_JUGADAS, CONTRASEÑA) " +
+                                   "VALUES (JUGADOR_SECUENCIA.NEXTVAL, ?, 0, ?)";
+                PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+                insertStmt.setString(1, username);
+                insertStmt.setString(2, password);
+                insertStmt.executeUpdate();
+
+                System.out.println("Registro exitoso.");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Por favor, introduce nombre de usuario y contraseña.");
+        }
     }
 }
