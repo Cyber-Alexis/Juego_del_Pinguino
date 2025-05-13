@@ -205,24 +205,29 @@ public class pantallaJuegoController {
 
     @FXML
     private void handleRapido() {
-    	Random rand = new Random();
-        int diceResult = rand.nextInt(10) + 5;
-        dadoResultText.setText("Ha salido: " + diceResult);
-        moveP1(diceResult);
-        numDadosRapidos.set(numDadosRapidos.get() - 1);
+        Random rand = new Random();
+        if (numDadosRapidos.get() > 0 && numDadosRapidos.get() < 3) {
+            int diceResult = rand.nextInt(3) + 4; // 4, 5 o 6
+            dadoResultText.setText("Ha salido: " + diceResult);
+            moveP1(diceResult);
+            numDadosRapidos.set(numDadosRapidos.get() - 1);
+        } else {
+            eventos.setText("¡No tienes dados rápidos disponibles! 🎲💨");
+        }
     }
 
     @FXML
     private void handleLento() {
     	Random rand = new Random();
     	if(numDadosLentos.get() > 0 && numDadosLentos.get() < 3) {
-    		int diceResult = rand.nextInt(3) + 1;
+    		int diceResult = rand.nextInt(3) + 1; // 1, 2 o 3
             dadoResultText.setText("Ha salido: " + diceResult);
             moveP1(diceResult);
             numDadosLentos.set(numDadosLentos.get() - 1);
-    	}
-    }
-
+    	 } else {
+             eventos.setText("¡No tienes dados lentos disponibles! 🎲💨");
+         }
+     }
     @FXML
     private void handleNieve() {
         eventos.setText("Usaste el botón nieve.");
