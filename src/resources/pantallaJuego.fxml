@@ -580,11 +580,6 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Finish" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
                   <Circle fx:id="P1" fill="BLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE">
                      <GridPane.margin>
                         <Insets />
@@ -601,6 +596,15 @@
                      <GridPane.margin>
                         <Insets left="120.0" />
                      </GridPane.margin></Circle>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="9">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="257.0" layoutY="-1.0">
+                           <image>
+                              <Image url="@../../img/fondo%20carreras.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
                </children>
             </GridPane>
          </top>
