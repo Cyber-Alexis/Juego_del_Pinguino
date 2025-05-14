@@ -79,6 +79,9 @@ public class pantallaPrincipalController {
         String username = userField.getText();
         String password = passField.getText();
 
+        saveCon.setUser(username);
+        String usuario = saveCon.getUser();
+        
         System.out.println("Login pressed: " + username + " / " + password);
 
         if (!username.isEmpty() && !password.isEmpty()) {
@@ -87,9 +90,12 @@ public class pantallaPrincipalController {
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, username);
                 stmt.setString(2, password);
-
+                
                 ResultSet rs = stmt.executeQuery();
-
+                
+                String sqlUpdatePJugadas = "UPDATE JUGADOR SET PARTIDAS_JUGADAS = PARTIDAS_JUGADAS + 1 WHERE nickname = '" + usuario + "'";
+                bbdd.update(conn, sqlUpdatePJugadas);
+                
                 if (rs.next()) {
                     // Usuario válido, carga la siguiente pantalla
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Resources/pantallaJuego.fxml"));

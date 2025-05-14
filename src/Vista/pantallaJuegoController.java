@@ -2,11 +2,14 @@ package Vista;
 
 import java.util.Random;
 
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -14,11 +17,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class pantallaJuegoController {
-	
-	private int numBolasNieve = 0;
-	private int numPeces = 0;
-	private final int MAX_BOLAS_NIEVE = 6;
-	private final int MAX_PECES = 6;
 	
     // Menu items
     @FXML private MenuItem newGame;
@@ -57,6 +55,8 @@ public class pantallaJuegoController {
     private TipoCasilla[] casillas = new TipoCasilla[NUMERO_CASILLAS]; // 5x10 = 50 casillas
     private IntegerProperty numDadosRapidos = new SimpleIntegerProperty(0);
     private IntegerProperty numDadosLentos = new SimpleIntegerProperty(0);
+    private IntegerProperty cantidadPeces = new SimpleIntegerProperty(0);
+    private IntegerProperty cantidadNieve = new SimpleIntegerProperty(0);
 
     @FXML
     private void initialize() {
@@ -70,9 +70,9 @@ public class pantallaJuegoController {
         }
         
         //Hacer lo mismo con las demas
-        colocarCasillas(TipoCasilla.INTERROGANTE,4);
-        colocarCasillas(TipoCasilla.OSO,2);
-        colocarCasillas(TipoCasilla.TRINEO,5);
+        colocarCasillas(TipoCasilla.INTERROGANTE,5);
+        colocarCasillas(TipoCasilla.OSO,3);
+        colocarCasillas(TipoCasilla.TRINEO,4);
         colocarCasillas(TipoCasilla.AGUJERO,5);
         casillas[0] = TipoCasilla.NORMAL;
         casillas[49] = TipoCasilla.META;
@@ -98,10 +98,16 @@ public class pantallaJuegoController {
         dadoResultText.setText("Ha salido: " + diceResult);
         moveP1(diceResult);
     }
-
+    private boolean aplicarEfecto = false;
+    
     private void moveP1(int steps) {
         p1Position += steps;
         if (p1Position >= 50) p1Position = 49;
+        
+        int row = p1Position / COLUMNS;
+        int col = p1Position % COLUMNS;
+        GridPane.setRowIndex(P1, row);
+        GridPane.setColumnIndex(P1, col);
 
         TipoCasilla tipo = casillas[p1Position];
 
@@ -125,23 +131,26 @@ public class pantallaJuegoController {
                 if (numDadosLentos.get() < 3) {
                     numDadosLentos.set(numDadosLentos.get() + 1);
                     eventos.setText("¡Interrogante! Obtuviste un dado lento. 🐢 Total: " + numDadosLentos.get());
+                    lento_t.setText("Dado lento: " + numDadosLentos.get()); // Actualizar texto
                 } else {
                     eventos.setText("¡Interrogante! Ibas a recibir un dado lento, pero ya tienes el máximo.");
                 }
 
             } else if (prob < 60) { // 35-59: bola de nieve (25%)
-                if (numBolasNieve < MAX_BOLAS_NIEVE) {
-                    numBolasNieve++;
-                    eventos.setText("¡Interrogante! Encontraste una bola de nieve. ❄️ Total: " + numBolasNieve);
+                if (cantidadNieve.get() < 6) {
+                    cantidadNieve.set(cantidadNieve.get() + 1);
+                    eventos.setText("¡Interrogante! Encontraste una bola de nieve. ❄️ Total: " + cantidadNieve.get());
+                    nieve_t.setText("Bolas de Nieve: " + cantidadNieve.get());
                 } else {
                     eventos.setText("¡Interrogante! Ibas a recibir una bola de nieve, pero ya tienes el máximo.");
                 }
 
             } else if (prob < 85) { // 60-84: pez (25%)
-                if (numPeces < MAX_PECES) {
-                    numPeces++;
+                if (cantidadPeces.get() < 2) {
+                	cantidadPeces.set(cantidadPeces.get() + 1);
                     tienePez = true;
-                    eventos.setText("¡Interrogante! Obtuviste un pez. 🐟 Total: " + numPeces);
+                    eventos.setText("¡Interrogante! Obtuviste un pez. 🐟 Total: " + cantidadPeces.get());
+                    peces_t.setText("Peces: " + cantidadPeces.get());
                 } else {
                     eventos.setText("¡Interrogante! Ibas a recibir un pez, pero ya tienes el máximo.");
                 }
@@ -150,6 +159,7 @@ public class pantallaJuegoController {
                 if (numDadosRapidos.get() < 3) {
                     numDadosRapidos.set(numDadosRapidos.get() + 1);
                     eventos.setText("¡Interrogante! Obtuviste un dado rápido. 🎲💨 Total: " + numDadosRapidos);
+                    rapido_t.setText("Dado Rapido: " + numDadosRapidos.get());
                 } else {
                     eventos.setText("¡Interrogante! Ibas a recibir un dado rápido, pero ya tienes el máximo.");
                 }
@@ -159,6 +169,8 @@ public class pantallaJuegoController {
             case OSO:
                 if (tienePez) {
                     eventos.setText("¡Te salvaste del oso con un pez! 🐟");
+                    cantidadPeces.set(cantidadPeces.get() - 1);
+                    peces.setText("Peces: " + cantidadPeces.get());
                     tienePez = false;
                 } else {
                     eventos.setText("¡El oso te atrapó! Vuelves al inicio.");
@@ -184,6 +196,10 @@ public class pantallaJuegoController {
                 
             case META:
                 eventos.setText("¡Felicidades! Has llegado a la meta 🏁");
+                Alert alerta = new Alert(AlertType.INFORMATION);
+            	alerta.setTitle(null);
+            	alerta.setHeaderText("Final del Juego");
+            	alerta.showAndWait();
                 break;
 
             default:
@@ -191,10 +207,6 @@ public class pantallaJuegoController {
                 break;
         }
 
-        int row = p1Position / COLUMNS;
-        int col = p1Position % COLUMNS;
-        GridPane.setRowIndex(P1, row);
-        GridPane.setColumnIndex(P1, col);
     }
 
     @FXML
@@ -206,11 +218,13 @@ public class pantallaJuegoController {
     @FXML
     private void handleRapido() {
         Random rand = new Random();
-        if (numDadosRapidos.get() > 0 && numDadosRapidos.get() < 3) {
-            int diceResult = rand.nextInt(3) + 4; // 4, 5 o 6
+        if (numDadosRapidos.get() > 0) {
+            int diceResult = rand.nextInt(6) + 5; // 5 a 10 inclusive
             dadoResultText.setText("Ha salido: " + diceResult);
+            aplicarEfecto = true;
             moveP1(diceResult);
             numDadosRapidos.set(numDadosRapidos.get() - 1);
+            rapido_t.setText("Dado Rápido: " + numDadosRapidos.get());
         } else {
             eventos.setText("¡No tienes dados rápidos disponibles! 🎲💨");
         }
@@ -218,16 +232,19 @@ public class pantallaJuegoController {
 
     @FXML
     private void handleLento() {
-    	Random rand = new Random();
-    	if(numDadosLentos.get() > 0 && numDadosLentos.get() < 3) {
-    		int diceResult = rand.nextInt(3) + 1; // 1, 2 o 3
+        Random rand = new Random();
+        if (numDadosLentos.get() > 0) {
+            int diceResult = rand.nextInt(3) + 1; // 1 a 3
             dadoResultText.setText("Ha salido: " + diceResult);
+            aplicarEfecto = true;
             moveP1(diceResult);
             numDadosLentos.set(numDadosLentos.get() - 1);
-    	 } else {
-             eventos.setText("¡No tienes dados lentos disponibles! 🎲💨");
-         }
-     }
+            lento_t.setText("Dado lento: " + numDadosLentos.get());
+        } else {
+            eventos.setText("¡No tienes dados lentos disponibles! 🐢");
+        }
+    }
+    
     @FXML
     private void handleNieve() {
         eventos.setText("Usaste el botón nieve.");
@@ -236,12 +253,31 @@ public class pantallaJuegoController {
     @FXML
     private void handleNewGame() {
         eventos.setText("Nuevo juego iniciado.");
+        
+        // Reiniciar estado del jugador
         p1Position = 0;
         tienePez = false;
-        inicializarCasillas();
+
+        // Reiniciar inventario
+        numDadosRapidos.set(0);
+        numDadosLentos.set(0);
+        cantidadPeces.set(0);
+        cantidadNieve.set(0);
+
+        // Actualizar textos del inventario
+        rapido_t.setText("Dado Rápido: 0");
+        lento_t.setText("Dado Lento: 0");
+        peces_t.setText("Peces: 0");
+        nieve_t.setText("Bolas de Nieve: 0");
+
+        // Regenerar el tablero
+        inicializarCasillas(); // Asegúrate que también redibuja el tablero
+
+        // Reposicionar jugador
         GridPane.setRowIndex(P1, 0);
         GridPane.setColumnIndex(P1, 0);
     }
+
 
     @FXML
     private void handleSaveGame() {
@@ -254,9 +290,8 @@ public class pantallaJuegoController {
     }
 
     @FXML
-    private void handleQuitGame() {
-        eventos.setText("Saliendo del juego...");
-        System.exit(0);
+    private void handleQuitGame(ActionEvent event) {
+        Platform.exit();
     }
 
     // Enum interno (incluido en el mismo archivo)
@@ -269,6 +304,10 @@ public class pantallaJuegoController {
         META
     }
     private void mostrarImagenes(){
+    	
+    	// Limpiar imágenes anteriores (sin borrar los círculos de los jugadores)
+        tablero.getChildren().removeIf(node -> node instanceof ImageView);
+    	
         for(int i = 0; i < casillas.length; i++) {
             if(casillas[i] == TipoCasilla.AGUJERO){
                 int row = i / COLUMNS;
