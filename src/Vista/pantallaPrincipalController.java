@@ -45,9 +45,18 @@ public class pantallaPrincipalController {
     @FXML
     private void handleNewGame() {
         System.out.println("New Game clicked");
-        // TODO
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Resources/pantallaJuego.fxml"));
+            Parent pantallaJuegoRoot = loader.load();
 
+            Scene pantallaJuegoScene = new Scene(pantallaJuegoRoot);
+            Stage stage = (Stage) newGame.getParentPopup().getOwnerWindow();
+            stage.setScene(pantallaJuegoScene);
+            stage.setTitle("Nueva Partida");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void handleSaveGame() {
         System.out.println("Save Game clicked");
@@ -61,7 +70,7 @@ public class pantallaPrincipalController {
     }
 
     @FXML
-    private void handleQuitGame(EventType event) {
+    private void handleQuitGame(ActionEvent event) {
         Platform.exit();
     }
    

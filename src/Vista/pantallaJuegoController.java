@@ -1,6 +1,9 @@
 package Vista;
 
 import java.util.Random;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -52,6 +55,8 @@ public class pantallaJuegoController {
 
     private static final int NUMERO_CASILLAS = 50;
     private TipoCasilla[] casillas = new TipoCasilla[NUMERO_CASILLAS]; // 5x10 = 50 casillas
+    private IntegerProperty numDadosRapidos = new SimpleIntegerProperty(0);
+    private IntegerProperty numDadosLentos = new SimpleIntegerProperty(0);
 
     @FXML
     private void initialize() {
@@ -114,39 +119,42 @@ public class pantallaJuegoController {
             break;
             
         case INTERROGANTE:
-            int recompensa = r.nextInt(4); // 0 a 3
-            switch (recompensa) {
-                case 0: // Bola de nieve
-                    if (numBolasNieve < MAX_BOLAS_NIEVE) {
-                        numBolasNieve++;
-                        eventos.setText("¡Encontraste una bola de nieve! ❄️ Total: " + numBolasNieve);
-                    } else {
-                        eventos.setText("¡Interrogante! Ibas a recibir una bola de nieve, pero ya tienes el máximo.");
-                    }
-                    break;
+            int prob = r.nextInt(100); // Valor entre 0 y 99
 
-                case 1: // Dado rápido
-                    eventos.setText("¡Interrogante! Te dieron un dado rápido. 🎲💨");
-                    // Aquí puedes aplicar efecto si lo deseas
-                    break;
+            if (prob < 35) { // 0-34: dado lento (35%)
+                if (numDadosLentos.get() < 3) {
+                    numDadosLentos.set(numDadosLentos.get() + 1);
+                    eventos.setText("¡Interrogante! Obtuviste un dado lento. 🐢 Total: " + numDadosLentos.get());
+                } else {
+                    eventos.setText("¡Interrogante! Ibas a recibir un dado lento, pero ya tienes el máximo.");
+                }
 
-                case 2: // Dado lento
-                    eventos.setText("¡Interrogante! Te dieron un dado lento. 🐢");
-                    // Aquí también podrías aplicar algún efecto especial
-                    break;
+            } else if (prob < 60) { // 35-59: bola de nieve (25%)
+                if (numBolasNieve < MAX_BOLAS_NIEVE) {
+                    numBolasNieve++;
+                    eventos.setText("¡Interrogante! Encontraste una bola de nieve. ❄️ Total: " + numBolasNieve);
+                } else {
+                    eventos.setText("¡Interrogante! Ibas a recibir una bola de nieve, pero ya tienes el máximo.");
+                }
 
-                case 3: // Pez
-                    if (numPeces < MAX_PECES) {
-                        numPeces++;
-                        tienePez = true;
-                        eventos.setText("¡Interrogante! Obtuviste un pez. 🐟 Total: " + numPeces);
-                    } else {
-                        eventos.setText("¡Interrogante! Ibas a recibir un pez, pero ya tienes el máximo.");
-                    }
-                    break;
+            } else if (prob < 85) { // 60-84: pez (25%)
+                if (numPeces < MAX_PECES) {
+                    numPeces++;
+                    tienePez = true;
+                    eventos.setText("¡Interrogante! Obtuviste un pez. 🐟 Total: " + numPeces);
+                } else {
+                    eventos.setText("¡Interrogante! Ibas a recibir un pez, pero ya tienes el máximo.");
+                }
+
+            } else { // 85-99: dado rápido (15%)
+                if (numDadosRapidos.get() < 3) {
+                    numDadosRapidos.set(numDadosRapidos.get() + 1);
+                    eventos.setText("¡Interrogante! Obtuviste un dado rápido. 🎲💨 Total: " + numDadosRapidos);
+                } else {
+                    eventos.setText("¡Interrogante! Ibas a recibir un dado rápido, pero ya tienes el máximo.");
+                }
             }
             break;
-
 
             case OSO:
                 if (tienePez) {
@@ -197,14 +205,29 @@ public class pantallaJuegoController {
 
     @FXML
     private void handleRapido() {
-        eventos.setText("Usaste el botón rápido.");
+        Random rand = new Random();
+        if (numDadosRapidos.get() > 0 && numDadosRapidos.get() < 3) {
+            int diceResult = rand.nextInt(3) + 4; // 4, 5 o 6
+            dadoResultText.setText("Ha salido: " + diceResult);
+            moveP1(diceResult);
+            numDadosRapidos.set(numDadosRapidos.get() - 1);
+        } else {
+            eventos.setText("¡No tienes dados rápidos disponibles! 🎲💨");
+        }
     }
 
     @FXML
     private void handleLento() {
-        eventos.setText("Usaste el botón lento.");
-    }
-
+    	Random rand = new Random();
+    	if(numDadosLentos.get() > 0 && numDadosLentos.get() < 3) {
+    		int diceResult = rand.nextInt(3) + 1; // 1, 2 o 3
+            dadoResultText.setText("Ha salido: " + diceResult);
+            moveP1(diceResult);
+            numDadosLentos.set(numDadosLentos.get() - 1);
+    	 } else {
+             eventos.setText("¡No tienes dados lentos disponibles! 🎲💨");
+         }
+     }
     @FXML
     private void handleNieve() {
         eventos.setText("Usaste el botón nieve.");
