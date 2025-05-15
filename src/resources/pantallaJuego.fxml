@@ -580,18 +580,10 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-<<<<<<< HEAD
                   <Circle fx:id="P1" fill="BLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin></Circle>
-=======
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Finish" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
->>>>>>> 18405ef7c03851cc3f8ed37f21ee5605e3981836
                   <Circle fx:id="P2" fill="RED" radius="15.0" stroke="BLACK" strokeType="INSIDE">
                      <GridPane.margin>
                         <Insets left="40.0" />
@@ -604,7 +596,6 @@
                      <GridPane.margin>
                         <Insets left="120.0" />
                      </GridPane.margin></Circle>
-<<<<<<< HEAD
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="9">
                      <children>
                         <ImageView fitHeight="48.0" fitWidth="257.0" layoutY="-1.0">
@@ -614,12 +605,6 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-=======
-                  <Circle fx:id="P1" fill="BLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin></Circle>
->>>>>>> 18405ef7c03851cc3f8ed37f21ee5605e3981836
                </children>
             </GridPane>
          </top>

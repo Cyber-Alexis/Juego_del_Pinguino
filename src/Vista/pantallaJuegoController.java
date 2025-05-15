@@ -271,7 +271,7 @@ public class pantallaJuegoController {
         nieve_t.setText("Bolas de Nieve: 0");
 
         // Regenerar el tablero
-        inicializarCasillas(); // Asegúrate que también redibuja el tablero
+        inicializarCasillas(); 
 
         // Reposicionar jugador
         GridPane.setRowIndex(P1, 0);
@@ -305,7 +305,7 @@ public class pantallaJuegoController {
     }
     private void mostrarImagenes(){
     	
-    	// Limpiar imágenes anteriores (sin borrar los círculos de los jugadores)
+    	
         tablero.getChildren().removeIf(node -> node instanceof ImageView);
     	
         for(int i = 0; i < casillas.length; i++) {

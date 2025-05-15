@@ -128,9 +128,9 @@ public class pantallaPrincipalController {
             try {
                 // Crear conexión y guardarla en saveCon
                 Connection conn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521/XEPDB2", // Cambia según tu base
-                    "DW2425_PIN_GRUP06",                          // Cambia por tu usuario
-                    "ABMM006"                        // Cambia por tu contraseña
+                    "jdbc:oracle:thin:@localhost:1521/XEPDB2", // Base de datos
+                    "DW2425_PIN_GRUP06",                          // Usuario
+                    "ABMM006"                        // Contraseña
                 );
                 saveCon.setConexion(conn);
 
