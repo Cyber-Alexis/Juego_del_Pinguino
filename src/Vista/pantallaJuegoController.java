@@ -68,17 +68,18 @@ public class pantallaJuegoController {
         for (int i = 0; i < casillas.length; i++) {
             casillas[i] = TipoCasilla.NORMAL;
         }
-        
-        //Hacer lo mismo con las demas
-        colocarCasillas(TipoCasilla.INTERROGANTE,5);
-        colocarCasillas(TipoCasilla.OSO,3);
-        colocarCasillas(TipoCasilla.TRINEO,4);
-        colocarCasillas(TipoCasilla.AGUJERO,5);
+
+        // Asignación aleatoria dentro de los rangos especificados
+        colocarCasillas(TipoCasilla.INTERROGANTE, r.nextInt(6) + 1); // 1 a 6
+        colocarCasillas(TipoCasilla.OSO, r.nextInt(3) + 1);          // 1 a 3
+        colocarCasillas(TipoCasilla.TRINEO, r.nextInt(3) + 2);       // 2 a 4
+        colocarCasillas(TipoCasilla.AGUJERO, r.nextInt(4) + 2);      // 2 a 5
         casillas[0] = TipoCasilla.NORMAL;
         casillas[49] = TipoCasilla.META;
-        
+
         mostrarImagenes();
     }
+    
     private Random r= new Random();
     private void colocarCasillas (TipoCasilla tipo, int cantidad) {
     	for (int i = 0; i < cantidad; i++) {
